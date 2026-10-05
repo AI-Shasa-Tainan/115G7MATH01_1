@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>第一章 段考闖關：正負數與科學記號</title>
+<style>
+:root{--bg:#f1f5f9;--card:#fff;--ink:#1b2a41;--mute:#5b6b80;--line:#cfd9e4;--pos:#1f64d6;--neg:#d6402a;--ok:#dff5e4;--okb:#1e8a3c;--bad:#fde3de;--badb:#c0392b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10171f;--card:#18222d;--ink:#e6edf5;--mute:#98a8bb;--line:#2b3a4a;--pos:#6aa4ff;--neg:#ff8a73;--ok:#173a22;--okb:#5fd17f;--bad:#43211c;--badb:#ff8a73}}
+:root[data-theme="dark"]{--bg:#10171f;--card:#18222d;--ink:#e6edf5;--mute:#98a8bb;--line:#2b3a4a;--pos:#6aa4ff;--neg:#ff8a73;--ok:#173a22;--okb:#5fd17f;--bad:#43211c;--badb:#ff8a73}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;line-height:1.3;margin:12px 0 4px}
+.sub{color:var(--mute);margin:0 0 14px}
+.nl{display:flex;align-items:flex-end;margin:8px 0 18px;border-bottom:3px solid var(--ink);position:relative}
+.nl span{flex:1;text-align:center;font-weight:700;padding-bottom:2px;border-left:2px solid var(--line)}
+.nl .n{color:var(--neg)}.nl .p{color:var(--pos)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.grid{grid-template-columns:1fr}}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--pos);outline-offset:2px}
+.unit{text-align:left;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;border-left-width:8px}
+.unit:nth-child(odd){border-left-color:var(--pos)}.unit:nth-child(even){border-left-color:var(--neg)}
+.unit b{display:block;font-size:1.05rem}.unit small{color:var(--mute)}
+.unit .sym{float:right;font-size:1.9rem;font-weight:700;color:var(--mute)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.95rem}
+.back{background:none;border:1px solid var(--line);border-radius:8px;padding:2px 10px}
+.bar{height:8px;background:var(--line);border-radius:4px;margin:10px 0 16px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--pos);width:0;transition:width .3s}
+.q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;font-size:1.1rem;font-weight:700;margin-bottom:12px}
+.opt{display:block;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0;font-size:1.05rem}
+.opt:hover:not(:disabled){border-color:var(--pos)}
+.opt.ok{background:var(--ok);border-color:var(--okb)}.opt.no{background:var(--bad);border-color:var(--badb)}
+.opt:disabled{cursor:default}
+.fb{margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--card);border:1px solid var(--line)}
+.fb b.ok{color:var(--okb)}.fb b.no{color:var(--badb)}
+.go{display:block;width:100%;margin-top:12px;padding:12px;border:0;border-radius:10px;background:var(--pos);color:#fff;font-weight:700;font-size:1.05rem}
+.big{font-size:2.4rem;font-weight:700;margin:6px 0}
+.rv{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0;font-size:.95rem}
+input,textarea{font:inherit;width:100%;padding:8px 12px;border:2px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}textarea{min-height:130px}table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{border:1px solid var(--line);padding:4px 6px;text-align:center}.low{color:var(--badb);font-weight:700}.tw{overflow-x:auto}.hide{display:none}
+@media(prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<div id="menu">
+<h1>第一章 段考闖關</h1>
+<p class="sub">選一個單元開始。每題四選一，選完馬上知道對或錯，並看到解析。</p>
+<div class="nl" aria-hidden="true"><span class="n">−3</span><span class="n">−2</span><span class="n">−1</span><span>0</span><span class="p">1</span><span class="p">2</span><span class="p">3</span></div>
+<p style="margin:0 0 6px"><b>先輸入班級和座號</b>（不用輸入姓名）</p><div style="display:flex;gap:10px;margin-bottom:14px"><input id="cl" maxlength="6" placeholder="班級，例如 709" aria-label="班級"><input id="sn" maxlength="2" inputmode="numeric" placeholder="座號，例如 12" aria-label="座號"></div><div class="grid" id="units"></div><p style="text-align:center;margin-top:22px"><button class="back" id="tch" type="button">老師：查看全班成績</button></p>
+</div>
+
+<div id="quiz" class="hide">
+<div class="top"><button class="back" id="bk" type="button">← 單元</button><span id="un"></span><span id="sc" aria-live="polite"></span></div>
+<div class="bar"><i id="pg"></i></div>
+<div class="q" id="qt"></div>
+<div id="os"></div>
+<div id="fb"></div>
+</div>
+
+<div id="res" class="hide">
+<h1 id="rt"></h1>
+<div class="big" id="rs"></div>
+<p class="sub" id="rm"></p>
+<a class="go" id="snd" target="_blank" rel="noopener" href="#" style="text-decoration:none;text-align:center">送給老師（會開啟表單，按「送出」即可）</a><div class="rv"><b>成績碼</b>（備用）：表單送不出去時，把這一行傳給老師<input id="cd" readonly style="margin-top:6px"><button class="back" id="cp" type="button" style="margin-top:6px">複製</button></div><div id="rw"></div>
+<button class="go" id="again" type="button">再玩一次這個單元</button>
+<button class="go" id="home" type="button" style="background:var(--mute)">回到單元選單</button>
+</div>
+<div id="tc" class="hide">
+<div class="top"><button class="back" id="tb" type="button">← 回首頁</button></div>
+<h1>全班成績</h1>
+<p class="sub">把同學傳來的成績碼（一行一筆）全部貼在下面，按「整理成績」。同一單元只取每位同學的最高分。</p>
+<textarea id="tin" aria-label="貼上成績碼" placeholder="709-12|1-1|86|7/7|1234"></textarea>
+<button class="go" id="tgo" type="button">整理成績</button><p style="text-align:right"><button class="back" id="tclr" type="button">清除本機練習紀錄</button></p>
+<p id="tms" class="sub"></p><div class="tw" id="tbl"></div>
+</div>
+</main>
+<script>
+// 每題：[題目, 正確答案, 錯誤1, 錯誤2, 錯誤3, 解析]
+var U=[
+{n:'1-1 正數與負數',s:'±',d:'數線、相反數、絕對值',q:[
+['以 60 分為基準，小華考 71 分，應記為？','＋11 分','−11 分','＋71 分','−71 分','71−60＝11，比基準多，記為＋11 分。'],
+['下列由小到大排列何者正確？','−3 ＜ −1.5 ＜ 0 ＜ 2','−1.5 ＜ −3 ＜ 0 ＜ 2','0 ＜ −1.5 ＜ −3 ＜ 2','2 ＜ 0 ＜ −1.5 ＜ −3','數線上越右越大：負數 ＜ 0 ＜ 正數，兩負數則絕對值大者較小。'],
+['下列敘述何者正確？','−2.7 的絕對值是 2.7','−5 ＞ −3','|−7|＝−7','0 是正數','負數的絕對值是去掉負號；−5 在 −3 的左邊所以較小；絕對值不會是負數；0 不是正數也不是負數。'],
+['若 |x|＝6.5，則 x＝？','6.5 或 −6.5','只有 6.5','只有 −6.5','無解','與原點距離 6.5 的點有左右兩個。'],
+['絕對值小於 5 的整數有幾個？','9 個','7 個','10 個','11 個','−4、−3、…、4 共 9 個（不含 ±5）。'],
+['−13 與 −29 的大小關係為？','−13 ＞ −29','−13 ＜ −29','−13 ＝ −29','無法比較','|−13|＝13 ＜ |−29|＝29，兩負數絕對值大者反而小。'],
+['3 的相反數加上 |−3|，結果為？','0','6','−6','3','3 的相反數是 −3，|−3|＝3，−3＋3＝0。']]},
+{n:'1-2 正負數的加減',s:'＋−',d:'加減法、去括號、距離與中點',q:[
+['(−35)＋(−18)＝？','−53','−17','53','17','同號相加：絕對值相加，冠上負號。'],
+['(−27)＋48＝？','21','−21','75','−75','異號相加：48−27＝21，符號取絕對值較大的正號。'],
+['15−42＝？','−27','27','−57','57','15−42＝15＋(−42)＝−(42−15)＝−27。'],
+['(−18)−(−30)＝？','12','−12','−48','48','減去 −30 就是加上 30：(−18)＋30＝12。'],
+['120−(45−80)＝？','155','85','−155','−85','括號前是「−」，內部變號：120−45＋80＝155。'],
+['|−9|−|4−10|＋(−3)＝？','0','6','−6','12','|−9|＝9，|4−10|＝|−6|＝6，9−6−3＝0。'],
+['數線上 A(−7)、B(5)，兩點中點坐標為？','−1','1','−6','6','AB 距離 12，一半為 6，−7＋6＝−1。'],
+['數線上與 A(−4) 距離為 9 的點，坐標為？','5 或 −13','13 或 −5','只有 5','只有 −13','−4＋9＝5，−4−9＝−13。']]},
+{n:'1-3 正負數的乘除',s:'×÷',d:'乘除、分配律、四則運算',q:[
+['(−8)×(−7)＝？','56','−56','15','−15','兩負數相乘（同號）得正。'],
+['(−2)×(−5)×(−3)×4＝？','−120','120','−24','24','3 個負數（奇數個）相乘為負，2×5×3×4＝120。'],
+['(−48)÷(−6)÷(−2)＝？','−4','4','−16','16','由左而右：(−48)÷(−6)＝8，8÷(−2)＝−4。'],
+['(−125)×17×(−8)＝？','17000','−17000','1700','−1700','先算 (−125)×(−8)＝1000，再乘 17。'],
+['利用分配律，(−23)×99＝？','−2277','2277','−2323','−2300','(−23)×(100−1)＝−2300＋23＝−2277。'],
+['8−(−3)×(5−9)＝？','−4','20','4','−20','括號內 5−9＝−4，(−3)×(−4)＝12，8−12＝−4。'],
+['(−30)÷5×2＝？','−12','−3','12','3','除法由左到右：(−30)÷5＝−6，−6×2＝−12。'],
+['下列哪一個等式成立？','(80＋20)÷4＝80÷4＋20÷4','80÷(−2＋10)＝80÷(−2)＋80÷10','100÷(20−5)＝100÷20−100÷5','6÷(2＋1)＝6÷2＋6÷1','只有「被除數」的加減可以分配，除數的加減不行。']]},
+{n:'1-4 指數與科學記號',s:'10ⁿ',d:'次方、科學記號、比大小',q:[
+['(−2)⁵＝？','−32','32','−10','10','負數的奇次方為負，2⁵＝32。'],
+['−2⁴＝？','−16','16','−8','8','−2⁴＝−(2×2×2×2)，底數是 2，不是 −2。'],
+['(−2)³＋3²×(−4)＝？','−44','−4','28','44','先算次方：−8＋9×(−4)＝−8−36＝−44。'],
+['50÷(−5)²−(−2)³＝？','10','−6','−10','6','50÷25−(−8)＝2＋8＝10。'],
+['(0.7)¹⁰、(0.7)¹¹、(0.7)¹² 的大小關係為？','(0.7)¹⁰ ＞ (0.7)¹¹ ＞ (0.7)¹²','(0.7)¹⁰ ＜ (0.7)¹¹ ＜ (0.7)¹²','三者相等','無法比較','底數介於 0 和 1，指數愈大值愈小。'],
+['168000 以科學記號表示為？','1.68×10⁵','168×10³','16.8×10⁴','1.68×10⁴','科學記號要 1 ≤ a ＜ 10，1 後面有 5 位。'],
+['3.7×10⁻⁶ 從小數點後第幾位開始出現不是 0 的數字？','第 6 位','第 7 位','第 5 位','第 3 位','0.0000037，3 在小數點後第 6 位。'],
+['2.8×10⁵ 寫成整數是幾位數？','6 位數','5 位數','7 位數','28 位數','280000 是 6 位數，即 (5＋1) 位。'],
+['8.2×10⁻⁶ □ 1.5×10⁻⁵，應填？','＜','＞','＝','無法比較','前者從小數點後第 6 位才有數字，後者第 5 位，所以前者較小。']]}
+];
+var $=function(i){return document.getElementById(i)};
+var cur,qs,i,score,combo,right,wrong,locked,best={};
+try{best=JSON.parse(localStorage.getItem('ch1best')||'{}')}catch(e){}
+function shuf(a){for(var k=a.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[j];a[j]=t}return a}
+function view(v){['menu','quiz','res','tc'].forEach(function(x){$(x).classList.toggle('hide',x!==v)});window.scrollTo(0,0)}
+function menu(){
+$('units').innerHTML=U.map(function(u,k){var b=best[k];return '<button class="unit" data-u="'+k+'"><span class="sym">'+u.s+'</span><b>'+u.n+'</b><small>'+u.d+'・'+u.q.length+' 題</small><br><small>'+(b!=null?'最高分 '+b:'尚未挑戰')+'</small></button>'}).join('');
+view('menu')}
+function ck(t){var h=0;for(var k=0;k<t.length;k++)h=(h*31+t.charCodeAt(k))%9973;return h}
+function nm(){var c=($('cl').value||'').replace(/[|\s]/g,''),n=($('sn').value||'').replace(/\D/g,'');return c&&n?c+'-'+n:''}
+function esc(t){return t.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function start(k){if(!nm()){($('cl').value?$('sn'):$('cl')).focus();return}try{localStorage.setItem('ch1id',JSON.stringify([$('cl').value,$('sn').value]))}catch(e){}cur=k;qs=shuf(U[k].q.slice());i=0;score=0;combo=0;right=0;wrong=[];view('quiz');show()}
+function show(){
+var q=qs[i];locked=false;
+$('un').textContent=U[cur].n;$('sc').textContent='第 '+(i+1)+'/'+qs.length+' 題｜'+score+' 分'+(combo>1?'｜連對 '+combo:'');
+$('pg').style.width=(i/qs.length*100)+'%';$('qt').textContent=q[0];$('fb').innerHTML='';
+$('os').innerHTML='';
+shuf([0,1,2,3]).forEach(function(k){var b=document.createElement('button');b.className='opt';b.type='button';b.textContent=q[k+1];b.dataset.k=k;$('os').appendChild(b)})}
+function pick(btn){
+if(locked)return;locked=true;
+var q=qs[i],ok=btn.dataset.k==='0';
+[].forEach.call($('os').children,function(b){b.disabled=true;if(b.dataset.k==='0'){b.classList.add('ok');if(b!==btn)b.textContent='✓ '+b.textContent}});
+if(ok){combo++;right++;score+=10+Math.min(combo-1,5)*2;btn.textContent='✓ '+btn.textContent}
+else{combo=0;wrong.push(q);btn.classList.add('no');btn.textContent='✗ '+btn.textContent}
+$('sc').textContent='第 '+(i+1)+'/'+qs.length+' 題｜'+score+' 分'+(combo>1?'｜連對 '+combo:'');
+var last=i===qs.length-1;
+$('fb').innerHTML='<div class="fb"><b class="'+(ok?'ok':'no')+'">'+(ok?'答對了！':'答錯了，正確答案是「'+q[1]+'」')+'</b><br>'+q[5]+'</div><button class="go" id="nx" type="button">'+(last?'看結果':'下一題')+'</button>';
+$('nx').focus()}
+function finish(){
+var n=qs.length,r=right/n;
+if(best[cur]==null||score>best[cur]){best[cur]=score;try{localStorage.setItem('ch1best',JSON.stringify(best))}catch(e){}}
+$('rt').textContent=U[cur].n+' 完成';var cs=(nm()||'未填')+'|'+U[cur].n.slice(0,3)+'|'+score+'|'+right+'/'+n;$('cd').value=cs+'|'+ck(cs);$('cp').textContent='複製';$('snd').href='https://docs.google.com/forms/d/e/1FAIpQLSfYxdpxAvEtR0mnedjYr1w3fZg0PNVd4hCHPrLlCixZUoJubw/viewform?usp=pp_url&entry.2072994933='+encodeURIComponent($('cl').value.replace(/[|\s]/g,''))+'&entry.554586290='+encodeURIComponent($('sn').value.replace(/\D/g,''))+'&entry.1218667294='+encodeURIComponent(U[cur].n)+'&entry.1583566956='+score+'&entry.995730440='+right;try{var lg=JSON.parse(localStorage.getItem('ch1log')||'[]');lg.push($('cd').value);localStorage.setItem('ch1log',JSON.stringify(lg.slice(-300)))}catch(e){}
+$('rs').textContent=score+' 分　'+(r===1?'★★★':r>=.7?'★★☆':r>=.4?'★☆☆':'☆☆☆');
+$('rm').textContent='答對 '+right+'/'+n+' 題。'+(wrong.length?'下面是答錯的題目，考前再看一遍：':'全部答對，太厲害了！');
+$('rw').innerHTML=wrong.map(function(q){return '<div class="rv"><b>'+q[0]+'</b><br>正確答案：'+q[1]+'<br>'+q[5]+'</div>'}).join('');
+view('res')}
+$('units').addEventListener('click',function(e){var b=e.target.closest('.unit');if(b)start(+b.dataset.u)});
+$('os').addEventListener('click',function(e){var b=e.target.closest('.opt');if(b)pick(b)});
+$('fb').addEventListener('click',function(e){if(e.target.id==='nx'){if(i===qs.length-1)finish();else{i++;show()}}});
+function tcr(){var raw=$('tin').value,st={},bad=0,U4=['1-1','1-2','1-3','1-4'];try{localStorage.setItem('ch1codes',raw)}catch(e){}
+var lc=[];try{lc=JSON.parse(localStorage.getItem('ch1log')||'[]')}catch(e){}
+(raw+'\n'+lc.join('\n')).split('\n').forEach(function(l){l=l.trim();if(!l)return;var p=l.split('|'),u=U4.indexOf(p[1]);if(p.length!==5||u<0||String(ck(p.slice(0,4).join('|')))!==p[4]||isNaN(+p[2])){bad++;return}var r=p[3].split('/'),o=st[p[0]]=st[p[0]]||{};if(!o[u]||+p[2]>o[u].s)o[u]={s:+p[2],r:+r[0],n:+r[1]}});
+var names=Object.keys(st).sort(function(a,b){return a.localeCompare(b,'zh',{numeric:true})}),h='<table><tr><th>班級-座號</th>'+U4.map(function(x){return'<th>'+x+'</th>'}).join('')+'</tr>',tot=[0,0,0,0],cnt=[0,0,0,0];
+names.forEach(function(a){h+='<tr><td>'+esc(a)+'</td>';for(var u=0;u<4;u++){var o=st[a][u];if(!o){h+='<td>—</td>';continue}var q=o.r/o.n;tot[u]+=q;cnt[u]++;h+='<td'+(q<.6?' class="low"':'')+'>'+o.s+'<br><small>'+o.r+'/'+o.n+'</small></td>'}h+='</tr>'});
+h+='<tr><th>平均答對率</th>'+tot.map(function(t,u){return'<th>'+(cnt[u]?Math.round(t/cnt[u]*100)+'%<br><small>'+cnt[u]+' 人</small>':'—')+'</th>'}).join('')+'</tr></table>';
+$('tbl').innerHTML=names.length?h:'';$('tms').textContent=names.length?'共 '+names.length+' 位同學（含這支手機／電腦上的 '+lc.length+' 筆練習紀錄）。紅字＝該單元答對率低於 60%。'+(bad?'另有 '+bad+' 行無法辨識或疑似被修改，已略過。':''):'目前沒有成績。這個頁面不會自動收到同學手機上的成績，請把同學傳來的成績碼貼在上方，再按「整理成績」。'}
+$('tch').onclick=function(){view('tc');tcr()};$('tclr').onclick=function(){try{localStorage.removeItem('ch1log')}catch(e){}tcr()};$('tb').onclick=menu;$('tgo').onclick=tcr;
+$('cd').onclick=function(){this.select()};
+$('cp').onclick=function(){var v=$('cd').value,f=function(){$('cd').select();$('cp').textContent='請長按選取後複製'};try{navigator.clipboard.writeText(v).then(function(){$('cp').textContent='已複製'},f)}catch(e){f()}};
+try{var d=JSON.parse(localStorage.getItem('ch1id')||'["",""]');$('cl').value=d[0];$('sn').value=d[1];$('tin').value=localStorage.getItem('ch1codes')||''}catch(e){}
+$('bk').onclick=menu;$('home').onclick=menu;$('again').onclick=function(){start(cur)};
+menu();
+</script>
+</body>
+</html>
